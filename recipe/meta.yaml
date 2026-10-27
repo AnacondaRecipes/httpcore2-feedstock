@@ -1,5 +1,5 @@
 {% set name = "httpcore2" %}
-{% set version = "2.12.0" %}
+{% set version = "2.16.0" %}
 
 package:
   name: {{ name }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 9293522bba0aa7c4c8e9e3f040c16575bd8868e155a77fa30c7a9085a5eae648
+  sha256: c72cd0413563b17e1cd8354677dff887466f8ec2551679759e93126534428643
 
 build:
-  skip: true # [py<310]
+  skip: true  # [py<311]
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
@@ -20,7 +20,7 @@ requirements:
     - hatchling
     - pip
     - python
-    - uv-dynamic-versioning >=0.14.0
+    - uv-dynamic-versioning >=0.14.1
   run:
     - h11 >=0.16
     - python
@@ -31,7 +31,7 @@ requirements:
     # socks
     - socksio 1.*
     # trio
-    - trio >=0.33.0,<1.0
+    - trio >=0.34.0,<1.0
     # asyncio
     - anyio >=4.5.0,<5.0
 
@@ -42,6 +42,7 @@ test:
     - pip
   commands:
     - pip check
+    # upstream tests live in the monorepo tests/ dir and are not shipped in the PyPI sdist
 
 about:
   home: https://github.com/pydantic/httpx2
@@ -54,7 +55,7 @@ about:
   license_family: BSD
   license_file: LICENSE.md
   dev_url: https://github.com/pydantic/httpx2
-  doc_url: https://httpx2.pydantic.dev
+  doc_url: https://pydantic.dev/docs/httpx2/get-started/
 
 extra:
   recipe-maintainers:
